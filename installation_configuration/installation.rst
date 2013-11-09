@@ -10,6 +10,7 @@ TODO
 Basic Database Configuraion
 ---------------------------
 
+* Postgres is the recommended database engine for tryton
 TODO
 
 Installing from PyPI
