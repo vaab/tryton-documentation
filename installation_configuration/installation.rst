@@ -15,4 +15,9 @@ TODO
 Installing from PyPI
 --------------------
 
+Creating a Virtualenv
+`````````````````````
+
+`virtualenv folder_name`
+
 TODO
