@@ -3,29 +3,28 @@ Debugging Trytond
 #################
 Tryton is a wonderful platform to work with, populated with equally wonderful
 modules. Unfortunately, even the most skilled programmers sometimes make
-mistakes, and then comes what developers do 90 % of their time : debugging.
+mistakes, and then comes what developers do 90 % of their time: debugging.
 
 This is what all debugging is about:
- * Find what went wrong
- * Find why it went wrong
+  * Find what went wrong
+  * Find why it went wrong
 
- Once the source of the problem is pinpointed, you can correct it. Usually,
- correcting a bug without knowing how it appeared will prove useless in the
- long run, so one got to be able to discover the core of the problem.
+Once the source of the problem is pinpointed, you can correct it. Usually,
+correcting a bug without knowing how it appeared will prove useless in the
+long run, so one got to be able to discover the core of the problem.
 
- Remember though, a not consistently reproductible bug is your worse nightmare.
- This category of bug requires some special treatment that will be detailed in a
- dedicated place. The following assumes that your are able to consistently and
- easily reproduce the problem.
+Remember though, a not consistently reproductible bug is your worse nightmare.
+This category of bug requires some special treatment that will be detailed in a
+dedicated place. The following assumes that your are able to consistently and
+easily reproduce the problem.
 
 Tryton Configuration
 ====================
 The tryton server comes bundled with a few options to  make the debugging
 easier. Every developement server should have the following setting enabled in
 their configuration file:
-.. code-block:: python
-
-   auto_reload = True
+::
+    auto_reload = True
 
 This makes the server reload itself every time one of its resources (python
 files, view files...) That allows you to modify your code to ease debugging
@@ -44,16 +43,16 @@ section.
 
 Of course, printing needs to be intelligent to be effective. Usually, you will
 want to do the following:
- * Find a context in which the bug arises. This is particularly important when
-   the method in which the bug occurs is often used. For instance, when calling
-   a method on a list of ids, you need to detect which instance made the method
-   crash.
-   This can easily be achieved by printing the method arguments at the top of
-   the call / the itertion values at the start of a loop. Another option would
-   be a try / except around the bad line.
- * Once you can design a test that you are confident allows you to detect the
-   problem's context, you can exhaustively use print to get all the context
-   information you need to understand what happens.
+  * Find a context in which the bug arises. This is particularly important when
+    the method in which the bug occurs is often used. For instance, when calling
+    a method on a list of ids, you need to detect which instance made the method
+    crash.
+    This can easily be achieved by printing the method arguments at the top of
+    the call / the itertion values at the start of a loop. Another option would
+    be a try / except around the bad line.
+  * Once you can design a test that you are confident allows you to detect the
+    problem's context, you can exhaustively use print to get all the context
+    information you need to understand what happens.
 
 Server Logging
 ==============
@@ -70,9 +69,8 @@ Client Logging
 The tryton gtk client provides useful fonctionnalities for debugging: debug
 mode and verbose mode. Those are arguments on the command line of the tryton
 gtk client:
-.. code-block:: python
-
-   tryton -d -v
+::
+    tryton -d -v
 
 The debug mode force the client to fetch the definition of each view you want
 to display, every time you want to display it, from the server. That includes
@@ -89,10 +87,9 @@ the client that triggers the problem, it may trigger tens of requests to the
 server, and you got to know which one of those caused the crash. Enabling the
 verbose mode will make every request from the client to the server displayed in
 the server log this way:
-.. code-block:: python
-
-   INFO:tryton.rpc:model.model_name.method_name(_, _, arg1, arg2, ..., context)
-   DEBUG:tryton.rpc:something
+::
+    INFO:tryton.rpc:model.model_name.method_name(_, _, arg1, arg2, ..., context)
+    DEBUG:tryton.rpc:something
 
 The first arguments of the method call are json-rpc (xml-rpc is similar)
 specific parameters like the session token. The answer is the json encoded
@@ -122,34 +119,38 @@ allows to use vim as an interface for pdb, which allows for a better view of
 the surrounding code.
 
 http://docs.python.org/2/library/pdb.html
+
 https://github.com/gotcha/vimpdb
 
 Setup trytond for debugging
 ===========================
 There are some traces that are very useful to set up in the server in order to
 check for the usual suspects:
- * Add those lines at the start of the raise_user_error method of the
-   WarningErrorMixin class of the trytond/error.py:
-   
-            import traceback
-            traceback.print_stack()
+  * Add those lines at the start of the raise_user_error method of the
+WarningErrorMixin class of the trytond/error.py:
+::   
+    import traceback
+    traceback.print_stack()
 
-   That will make it so everytime a user error is thrown somewhere in the
-   server, the server log will print the current stack before displaying the
-   error to the user.
- * Enclose the 
+That will make it so everytime a user error is thrown somewhere in the
+server, the server log will print the current stack before displaying the
+error to the user.
+  * Enclose the 
+    ::
         return json.dumps(response, cls=JSONEncoder)
-   statement in the try / except + traceback + raise to know what really failed
-   when you got an error 200 client side.
- * Write
+    statement in the try / except + traceback + raise to know what really failed
+    when you got an error 200 client side.
+  * Write
+    ::
         print cls.__name__, field_name, value
-   in ModelStorage._validate.required_test (modelstorage.py). This will give
-   you some info in case of "The field ... is required"
- * Write
+    in ModelStorage._validate.required_test (modelstorage.py). This will give
+    you some info in case of "The field ... is required"
+  * Write
+    ::
         print cls.__name__, field_name, value, test
-   in ModelStorage._validate at the
-   cls.raise_user_error('selection_validation_record') line. That way you will
-   know why "The value ... is not in the selection"
+    in ModelStorage._validate at the
+    cls.raise_user_error('selection_validation_record') line. That way you will
+    know why "The value ... is not in the selection"
 
 Current errors and how to debug them
 =====================================
