@@ -100,7 +100,7 @@ do, which is a step toward resolution.
 
 Pdb
 ===
-Pdb is the Python Debugger. It may be useful in particularly complex cases, or
+Pdb_ is the Python Debugger. It may be useful in particularly complex cases, or
 when debugging the client itself. It basically provides you a way to place
 breakpoints in your code (which is particularly good combined with the server
 auto-reloading feature).
@@ -114,43 +114,51 @@ problem, but you cannot figure out exactly what is going on.
 It is no the prefered way to debug as it is some sort of overkill, but
 definitely useful in some situations.
 
-Note that for vim users, there exists a python vim binding named wimpdb which
+Note that for vim users, there exists a python vim binding named Vimpdb_ which
 allows to use vim as an interface for pdb, which allows for a better view of
 the surrounding code.
 
-http://docs.python.org/2/library/pdb.html
-
-https://github.com/gotcha/vimpdb
+.. _Pdb: http://docs.python.org/2/library/pdb.html
+.. _Vimpdb: https://github.com/gotcha/vimpdb
 
 Setup trytond for debugging
 ===========================
 There are some traces that are very useful to set up in the server in order to
-check for the usual suspects:
-  * Add those lines at the start of the raise_user_error method of the
+check for the usual suspects.
+
+Debug those annoying Error 200
+------------------------------
+Enclose the 
+::
+    return json.dumps(response, cls=JSONEncoder)
+statement in the try / except + traceback + raise to know what really failed
+when you got an error 200 client side.
+
+Know where functional errors where thrown
+-----------------------------------------
+Add those lines at the start of the raise_user_error method of the
 WarningErrorMixin class of the trytond/error.py:
 ::   
     import traceback
     traceback.print_stack()
-
-That will make it so everytime a user error is thrown somewhere in the
+That will make it so that everytime a user error is thrown somewhere in the
 server, the server log will print the current stack before displaying the
 error to the user.
-  * Enclose the 
-    ::
-        return json.dumps(response, cls=JSONEncoder)
-    statement in the try / except + traceback + raise to know what really failed
-    when you got an error 200 client side.
-  * Write
-    ::
-        print cls.__name__, field_name, value
-    in ModelStorage._validate.required_test (modelstorage.py). This will give
-    you some info in case of "The field ... is required"
-  * Write
-    ::
-        print cls.__name__, field_name, value, test
-    in ModelStorage._validate at the
-    cls.raise_user_error('selection_validation_record') line. That way you will
-    know why "The value ... is not in the selection"
 
-Current errors and how to debug them
+Debug Functional Errors
+-----------------------
+Write
+::
+    print cls.__name__, field_name, value
+in ModelStorage._validate.required_test (modelstorage.py). This will give
+you some info in case of "The field ... is required"
+
+Write
+::
+    print cls.__name__, field_name, value, test
+in ModelStorage._validate at the
+cls.raise_user_error('selection_validation_record') line. That way you will
+know why "The value ... is not in the selection"
+
+Usual errors and how to debug them
 =====================================
