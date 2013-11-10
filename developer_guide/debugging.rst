@@ -53,7 +53,7 @@ want to do the following:
     a method on a list of ids, you need to detect which instance made the method
     crash.
     This can easily be achieved by printing the method arguments at the top of
-    the call / the itertion values at the start of a loop. Another option would
+    the call / the iteration values at the start of a loop. Another option would
     be a try / except around the bad line.
   * Once you can design a test that you are confident allows you to detect the
     problem's context, you can exhaustively use print to get all the context
@@ -63,7 +63,7 @@ Server Logging
 ==============
 
 Use python's logging module to write down useful data for debugging. If you use
-the 'DEBUG' loglevel, it will not appear anywhere. It is intersting to use it
+the 'DEBUG' loglevel, it will not appear anywhere. It is interesting to use it
 in tricky places of the code in which for instance not all cases can be
 properly tested.
 
@@ -90,7 +90,7 @@ The verbose mode is more useful from a debugging point of view.
 
 Every action in the client triggers one / multiple server requests. For
 instance, opening a view requires the client to fetch the view definition, the
-access right data, the records' data, etc. Once you nailed down the action in
+access right data, the records data, etc. Once you nailed down the action in
 the client that triggers the problem, it may trigger tens of requests to the
 server, and you got to know which one of those caused the crash. Enabling the
 verbose mode will make every request from the client to the server displayed in
