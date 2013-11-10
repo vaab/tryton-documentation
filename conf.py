@@ -26,7 +26,8 @@ sys.path.insert(0, os.path.abspath('_ext'))
 
 # Add any Sphinx extension module names here, as strings. They can be extensions
 # coming with Sphinx (named 'sphinx.ext.*') or your custom ones.
-extensions = ['edit_on_github']
+# extensions = ['edit_on_github']
+extnsions = []
 edit_on_github_project = 'openlabs/tryton-documentation'
 edit_on_github_branch = 'master'
 
