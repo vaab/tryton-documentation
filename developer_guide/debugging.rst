@@ -6,6 +6,7 @@ modules. Unfortunately, even the most skilled programmers sometimes make
 mistakes, and then comes what developers do 90 % of their time: debugging.
 
 This is what all debugging is about:
+
   * Find what went wrong
   * Find why it went wrong
 
@@ -32,17 +33,21 @@ with the client running, and restart the action that caused the problem to
 either obtain more data on the problem, or to check if a modification you made
 changes something.
 
-Keep in mind though that the modifications that requires a database update to
-be effective still requires a database upgrade.
+.. tip::
+
+    Keep in mind though that the modifications that requires a database update to
+    be effective still requires a database upgrade.
 
 Usage of print
 ==============
+
 The most basic debugging method with python is printing. It is particularly
 efficient with the server properly configured as described in the previous
 section.
 
 Of course, printing needs to be intelligent to be effective. Usually, you will
 want to do the following:
+
   * Find a context in which the bug arises. This is particularly important when
     the method in which the bug occurs is often used. For instance, when calling
     a method on a list of ids, you need to detect which instance made the method
@@ -56,16 +61,19 @@ want to do the following:
 
 Server Logging
 ==============
+
 Use python's logging module to write down useful data for debugging. If you use
 the 'DEBUG' loglevel, it will not appear anywhere. It is intersting to use it
 in tricky places of the code in which for instance not all cases can be
 properly tested.
+
 Currently, the tryton server does not allow easy configuration of the output
 log level. To achieve this, you need to edit trytond/server.py and replace
 occurences of logging.WARNING with logging.DEBUG in TrytonServer.__init__
 
 Client Logging
 ==============
+
 The tryton gtk client provides useful fonctionnalities for debugging: debug
 mode and verbose mode. Those are arguments on the command line of the tryton
 gtk client:
@@ -100,6 +108,7 @@ do, which is a step toward resolution.
 
 Pdb
 ===
+
 Pdb_ is the Python Debugger. It may be useful in particularly complex cases, or
 when debugging the client itself. It basically provides you a way to place
 breakpoints in your code (which is particularly good combined with the server
@@ -123,6 +132,7 @@ the surrounding code.
 
 Setup trytond for debugging
 ===========================
+
 There are some traces that are very useful to set up in the server in order to
 check for the usual suspects.
 
@@ -141,6 +151,7 @@ WarningErrorMixin class of the trytond/error.py:
 ::   
     import traceback
     traceback.print_stack()
+    
 That will make it so that everytime a user error is thrown somewhere in the
 server, the server log will print the current stack before displaying the
 error to the user.
@@ -150,6 +161,7 @@ Debug Functional Errors
 Write
 ::
     print cls.__name__, field_name, value
+    
 in ModelStorage._validate.required_test (modelstorage.py). This will give
 you some info in case of "The field ... is required"
 
