@@ -14,6 +14,11 @@ Transactions
 
 TODO
 
+Extending Tryton (Inheritance)
+------------------------------
+
+TODO
+
 WebServices
 -----------
 
