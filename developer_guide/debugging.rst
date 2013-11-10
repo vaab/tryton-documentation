@@ -7,7 +7,7 @@ mistakes, and then comes what developers do 90 % of their time: debugging.
 
 This is what all debugging is about:
   * Find what went wrong
-  * Find why it went wrong
+  * Understand why it went wrong
 
 Once the source of the problem is pinpointed, you can correct it. Usually,
 correcting a bug without knowing how it appeared will prove useless in the
@@ -32,8 +32,9 @@ with the client running, and restart the action that caused the problem to
 either obtain more data on the problem, or to check if a modification you made
 changes something.
 
-Keep in mind though that the modifications that requires a database update to
-be effective still requires a database upgrade.
+Keep in mind though that the modifications that require creating new records in
+the database to be effective still require a database upgrade. That includes
+adding new fields, creating new records in xml (views / actions...).
 
 Usage of print
 ==============
@@ -128,10 +129,11 @@ check for the usual suspects.
 
 Debug those annoying Error 200
 ------------------------------
-Enclose the 
+In the trytond/protocols/jsonrpc.py file, in SimpleJSONRPCDispatcher._marshaled_dispatch,
+you should enclose the 
 ::
     return json.dumps(response, cls=JSONEncoder)
-statement in the try / except + traceback + raise to know what really failed
+statement in a try / except + traceback + raise to know what really failed
 when you got an error 200 client side.
 
 Know where functional errors where thrown
@@ -159,6 +161,29 @@ Write
 in ModelStorage._validate at the
 cls.raise_user_error('selection_validation_record') line. That way you will
 know why "The value ... is not in the selection"
+
+How to deal with non-reproductible errors / client errors
+=========================================================
+Those are the worst thing you can encounter. The solution for debugging them is
+the same: consider you got only one go:
+  * When the error occurs server-side and is not reproductible, the only 
+    thing you can do is make it so that you get the maximum information out of
+    it the few times it occurs.
+  * The client does not have the nice autoreload feature of the server (it is
+    only possible in the server as it runs separate threads). So everytime you
+    change the code, you need to fully restart it. The bottom line is the same:
+    you got to make those runs worth it.
+    
+So basically, use logging extensively. Logging is nice because you can just go on
+something else, until the error occurs. Once it does occur, you should be able to
+get relevant information about the error context, which hopefully will make it
+possible to pinpoint it and understand how to reproduce it.
+
+Another option is to use Pdb_'s post-mortem_ debug mode. This allows you to
+try / except your error, then trigger Pdb_ in the except block. Doing so will
+make python enter debugging mode in the context of the error when it occurs.
+
+.. _post-mortem : http://docs.python.org/2/library/pdb.html#pdb.post_mortem
 
 Usual errors and how to debug them
 =====================================
