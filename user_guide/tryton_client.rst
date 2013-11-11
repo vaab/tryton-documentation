@@ -70,7 +70,7 @@ The most common options are:
 * Toolbar: Used to change the toolbar view. You can select to show only icons,
   only text and text and icons. The default value will show only icons.
 * Form: Used to alter from view behaviour. The following options are available:
-    * Save Width/Height: If marked the client will remeber the width of the
+    * Save Width/Height: If marked the client will remember the width of the
       columns if you modify it.
     * Save Tree Status: If marked the client will remember the opened nodes in
       tree view.
@@ -137,7 +137,8 @@ Tips and Tricks
 * *Favorites*: You can save you favorites menu options by clicking on their
   star. Your favorites will be show in the `Favorites` menu of the client.
 * *Global search*: The text box in the top of the menu option is used to
-  perform a text search on all global search enabled models.
+  perform a text search on all global search enabled models. You can also
+  access the global search by typing Ctrl+K from any place of the client
 * Saving searches
 * Hide the menu
 * Right clicking on tree view
