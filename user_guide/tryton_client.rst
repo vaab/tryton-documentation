@@ -127,7 +127,102 @@ In the *Report* group the following icons are available (in order):
 Searching
 ---------
 
-TODO
+A query is composed of search clauses. A clause is composed of a field name
+(with : at the end), an operator and a value. The field name is optional and
+defaults to the record name. The operator is also optional and defaults to
+a case insensitive search on the name of the record.
+
+Examples:
+
+mich
+
+.. image:: images/search-mich.png
+   :align: center
+
+
+Name: Michael
+
+
+.. image:: images/search-michael.png
+   :align: center
+
+
+
+Operators
+``````````
+
+The following operators can be used:
+
+ * =: equal to
+ * <: less then
+ * <=: less then or equal to
+ * >: greater then
+ * >=: greater then or equal to
+ * !=: not equal
+ * !: not equal or not like (depending of the type of field)
+
+For example: Name: != Dwight
+
+
+Wildcards
+`````````
+
+There are two wildcards:
+
+%: matches any string of zero or more characters
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. image:: images/search-with-percentage.png
+   :align: center
+
+'_': matches any single character
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. image:: images/search-with-underscore.png
+   :align: center
+
+It is possible to escape special characters in values by using double quotes.
+For example: Name: "Michael:Scott"
+Here it will search with the value Michael:Scott.
+
+
+Clause composition
+``````````````````
+
+The clauses can be composed using the two boolean operators `and` and `or`.
+By default, there is an implicit `and` between each clause if no operator is
+specified.
+
+For example::
+
+    Name: Michael Amount: 100
+
+is the same as::
+
+    Name: Michael and Amount: 100
+
+
+Example using `or`
+~~~~~~~~~~~~~~~~~~
+
+.. image:: images/search-with-or.png
+   :align: center
+
+
+The `and` operator has a highest precedence than or but you can change
+it by using parenthesis.
+
+For example::
+
+    (Name: Michael or Name: Pam) and Amount: 100
+
+is different than::
+
+    Name: Michael or Name: Pam and Amount: 100
+
+which is evaluated as::
+
+    Name: Michael or (Name: Pam and Amount: 100)
 
 Tips and Tricks
 ---------------
