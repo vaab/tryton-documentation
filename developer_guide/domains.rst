@@ -14,13 +14,25 @@ is an example of a very basic domain:
 ::
     [('amount', '>', 0)]
 
-This domain will filter all records whose *amount* field is not greater than 0.
+This domain will filter all records whose *amount* field is greater than 0.
 
 A *domain clause* is the building block of a domain. A full domain combines
 multiple domain clauses, as well as the *OR* and *AND* operators.
 Domain Clause:
 ::
     ('field_name', 'operator', value, <optional parameter>)
+
+The 'field_name' part of the domain clause is much more than just a field
+name. It is possible to chain fields, in order to apply contraints on a
+Many2One fields. For instance,
+::
+    ('invoice.date', '>', Date.today())
+is a valid domain.
+
+.. warning:: 
+    Though it is theoratically possible to chain fields at will, be carfeul
+    that you will still be limited by the database performance. Usually, more
+    than two chains (i.e. field1.field2.field3) should be avoided if possible.
 
 Domain (the *AND* operator is implicit between domain clauses):
 ::
@@ -99,6 +111,12 @@ record is *True*, it will accept all target model records for which the field
 for which the 'amount' is less than 0.
 This gives you a wide range of possibilities to define precisely the domain you
 need for what you want to do.
+
+Using Pyson to dynamically set the search value:
+::
+    ('product.category', '=', Eval('category'))
+Here, *product.category* is the field on which the domain clause should be
+applied. *category* is the current record's category field value.
 
 Tuning a full domain with Pyson:
 ::
