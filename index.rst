@@ -12,8 +12,8 @@ Contents:
    :maxdepth: 2
 
    user_guide/index
-   developer_guide/index
    installation_configuration/index
+   developer_guide/index
 
 
 
