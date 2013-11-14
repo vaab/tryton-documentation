@@ -138,14 +138,14 @@ Setup trytond for debugging
 There are some traces that are very useful to set up in the server in order to
 check for the usual suspects.
 
-Debug those annoying Error 200
+Debug those annoying Error 500
 ------------------------------
 In the trytond/protocols/jsonrpc.py file, in SimpleJSONRPCDispatcher._marshaled_dispatch,
 you should enclose the 
 ::
     return json.dumps(response, cls=JSONEncoder)
 statement in a try / except + traceback + raise to know what really failed
-when you got an error 200 client side.
+when you got an error 500 client side.
 
 Know where functional errors where thrown
 -----------------------------------------
