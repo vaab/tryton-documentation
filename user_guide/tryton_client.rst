@@ -9,7 +9,7 @@ Getting the Tryton Desktop Client
 ---------------------------------
 
 The desktop client can be downloaded from the `downloads page
-<http://ww.tryton.org/downloads.html>`_ of the Tryton website.
+<http://www.tryton.org/download.html>`_ of the Tryton website.
 
 .. warning:: To be able to connect to a server you must use a client version
              of the same series as server. So if your server is series 3.0
