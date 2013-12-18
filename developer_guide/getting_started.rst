@@ -10,10 +10,10 @@ TODO
 Hello World (in progress)
 ------------------------
 
-Almost every Tryton functionality that you are going to developed in a daily basis is enclosed into modules.
-In order to get an idea of available modules you should take a look inside trytond/modules. There you are going
-to see many folders. Each one comprises one set of facilities that can be installed and will be therefore
-available to end users. Some examples are company, country, currency and party.
+Almost every Tryton functionality that you are going to develop on a daily basis is enclosed into the modules.
+In order to get an idea of available modules you should take a look inside trytond/modules. You will view many folders
+in the modules. Each one comprises one set of facilities that can be installed and will be available
+to the end users. Some examples are company, country, currency and party.
 
 In order to create your own module, your first step is to create a folder inside the aforementioned directory. In
 this hello world tutorial we are going to create a simple library control module:
@@ -28,39 +28,39 @@ As our first step, we are going to create the following files:
 * __init__.py
 * library.py
 
-Lets see the contents and purpose of each one in detail:
+Let's see the contents and purpose of each one in detail:
 
 tryton.cfg
 ~~~~~~~~~~
 
 This file must be present at the root of your module's directory. It contains the version of the module and a list of the
 xml files the module contains. Our module does not contain any xml files yet. It may also include a list of the modules it depends on.
-We will see, later, the correct syntax to include those references.
+Later, we will see the correct syntax to include those references.
 
 ::
 
     [tryton]
     version=2.8.0
 
-In the example above, we are stating that this module is meant to be used with Tryton 2.8.0. If you want, you can check
-the existing modules' tryton.cfg files to see their respective structure.
+In the example above, we are stating that this module is meant to be used with Tryton 2.8.0. You can check
+the tryton.cfg files of the existing modules to view their respective structure.
 
 
 \__init__.py
 ~~~~~~~~~~~~
 
 This file must be present at the root of your module's directory. It serves two main purposes: it transforms your directory
-into a Python visible package (according to Python general rules) ant it also registers in the *Pool* the entity classes
+into a Python visible package (according to Python general rules) ant it also registers in the *Pool*, the entity classes
 of the module.
 
 For now, you can think of the *Pool* as a "in memory synchronized image" of your database, because Tryton
 follows the so called *active record* pattern. Tryton takes care of database table creation and of the mapping
-between the in memory representation of the entity and the respective columns in the database. It also takes care of the
-synchronization of the data loaded in your in memory entities and the persistent data on the database.
+between the in-memory representation of the entity and the respective columns in the database. It also takes care of the
+synchronization of the data loaded in your in-memory entities and the persistent data on the database.
 
-Whenever we are building a module in Tryton, we will deal with a high-level, object-oriented representation of our entities.
-We are, in most part, free from writing explicit SQL or python-sql instructions. But in order for this *magic* to happen,
-Tryton's *Pool* must be "aware" of the existence of you entity classes.
+Whenever we are building a module in Tryton, we deal with a high-level, object-oriented representation of our entities.
+Generally, we are free from writing explicit SQL or python-sql instructions, but in order for this *magic* to happen,
+Tryton's *Pool* must be "aware" of the existence of your entity classes.
 
 ::
 
@@ -73,8 +73,8 @@ Tryton's *Pool* must be "aware" of the existence of you entity classes.
             module='library', type_='model'
         )
 
-In the example above, we are registering the *Book* class into the *Pool*. Whenever the trytond service runs, it starts by
-initializing every module that is installed (more on that in a few lines), i.e., it performs the regular Python initialization
+In the example above, we are registering the *Book* class into the *Pool*. Whenever the trytond service runs, it starts with
+initializing every module that is installed (more on that in the coming lines), i.e., it performs the regular Python initialization
 of packages. That means the execution of the code contained inside the __init__.py.
 
 If you are unfamiliar with the package initialization, you can think of it as performing an analogous role as
@@ -89,7 +89,7 @@ This file must be present at the root of your module's directory. According to a
 
 If your domain model is a commercial enterprise, your domain model would contain entities such as *SaleOrder*, *Product*,
 *Customer* and so on. Our tutorial here is proposing a library domain model, where you would expect to find *Book*, *Author*,
-*Publisher*, etc. A domain model encompasses the real world objects that your software solution is expected to deal with.
+*Publisher*, etc. A domain model encompasses real world objects that your software solution is expected to deal with.
 
 In our tutorial, we are going to have a simple Book model. It has some fields associated with it: *title*, *isbn*, *subject*,
 *abstract*. Each field has a **Type**. This type determines many aspects and behaviours of the application. For instance,
@@ -140,10 +140,10 @@ After creating the directory and the three files above, the trytond server shoul
 
 The -d flag indicates the name of the database and the -i flag indicates that the module library should be installed.
 
-When you login in the Tryton client after the procedure above, you are not going to see any changes yet, because we have
-not yet defined the windows (views in Tryton's parlance), nor we have defined the menus or actions to open those windows.
+When you login into the Tryton client after the above procedure, you are not going to see any changes yet, because till now,
+we have netiher defined the windows (views in Tryton's parlance), nor we have defined the menus or actions to open those windows.
 
-Anyway, if you access the defined database, you are going to see the the aforementioned table created.
+If you access the defined database, you are going to see the the aforementioned table created.
 
 .. note::
 What we have done so far: We have created a module, we have installed that module inside Tryton server, we have defined an entity class and Tryton has created the corresponding table in the database for us. All that with no more than 20 LOC total! Awesome!
