@@ -166,7 +166,7 @@ file, as we have mentioned before. So edit it:
     xml:
         library.xml
 
-Next, lets edit the library.xml file so it will contain de declaration of our menu and its respective menu item (submenu):
+Next, lets edit the library.xml file so it will contain the declaration of our menu and its respective menu item (submenu):
 
 library.xml
 ~~~~~~~~~~~

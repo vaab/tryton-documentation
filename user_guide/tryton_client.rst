@@ -50,7 +50,7 @@ add a new one by using the `Add` button. You can also delete old profiles with
 the `Remove` button. Use the right part of the screen to modify current
 profiles or to add the details of new created profiles.
 
-The client will try to connect to the server to load the databases. It will 
+The client will try to connect to the server to load the databases. It will
 fail if you can't connect to the server.
 
 You can open the Tryton client numerous times. This is useful
@@ -90,17 +90,17 @@ In every Tryton tab the following toolbar option is available.
 
 .. figure:: images/tryton-toolbar.jpg
 
-You can change toolbar view, just go to "option" on the top of the screen 
+You can change toolbar view, just go to "option" on the top of the screen
 and select the toolbar options and select one from the following:
 
 * Default
-* Test and icons  
+* Text and icons
 * Icons
-* Test
+* Text
 
-Test and icon view can be seen below:
+Text and icon view can be seen below:
 
-.. figure:: images/tryton-toolbar-text.jpg 
+.. figure:: images/tryton-toolbar-text.jpg
 
 
 Toolbar icons
