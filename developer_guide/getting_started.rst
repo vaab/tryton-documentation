@@ -147,3 +147,72 @@ If you access the defined database, you are going to see the the aforementioned 
 
 .. note::
 What we have done so far: We have created a module, we have installed that module inside Tryton server, we have defined an entity class and Tryton has created the corresponding table in the database for us. All that with no more than 20 LOC total! Awesome!
+
+
+Creating Menus
+--------------
+
+Now we have to make the user interface for our module. We need to create a menu, a menu item and the windows to be able
+to input and access data.
+
+First we are going to create, on the root of our module, a **library.xml** file. This file must be listed on the **tryton.cfg**
+file, as we have mentioned before. So edit it:
+
+::
+
+    [tryton]
+    version=2.8.0
+
+    xml:
+        library.xml
+
+Next, lets edit the library.xml file so it will contain de declaration of our menu and its respective menu item (submenu):
+
+library.xml
+~~~~~~~~~~~
+::
+
+    <?xml version="1.0"?>
+    <tryton>
+        <data>
+            <menuitem name="Library" sequence="0" id="menu_library"/>
+            <menuitem name="Books" parent="menu_library" id="menu_books"/>
+        </data>
+    </tryton>
+
+Observe that this file is a *regular* xml file. So it starts with the ordinary xml version declaration at the top, and
+it has as its master element the *tryton* element, followed by a *data* element. The other elements will all be children of
+*data*
+
+In the xml file above we have declared two *menuitems*. The first one, named *Library* will be placed on the root menu of
+Tryton client. Observe that it has, besides the name attribute, a sequence, that indicates the position of the menu, and
+an id, that must be **unique**. This id will identify this element to the rest of the software. It will be placed on the
+root menu because it has no parents.
+
+The second *menuitem*, named *Books* has another element: a *parent* element, which points to the id of the former menu
+(*id="menu_library"*), indicating that it is going to be nested on the first one.
+
+Let's update the Tryton Server, installing the new modifications:
+
+::
+
+    TRYTOND_HOME/trytond/bin/trytond -d NAME_OF_THE_DATABASE -u library
+
+Notice, now, that we have changed the flag from **-i** (install) to **-u** (update) to be in accordance with the fact that
+the module is already installed and only need to be updated.
+
+Let's also restart the Tryton client now. Remember to start it with the **-d** (development) flag, so it can update the
+cache and show the changes we have just made:
+
+::
+
+    TRYTON_HOME/tryton/bin/tryton -d
+
+When you log in again on the client, you are going to see that the menu *Library* and the submenu *Books* have been created.
+
+But the menus do nothing yet. We have only declared the **existence** of the menus, but we have not yet declared the **actions**
+those menus execute.
+
+What we are going to do now is to create an action that will be triggered by the submenu *Books*. The first menu *Library*
+will trigger no action, because we want it to be only a summary menu. The books menu, though, will open the windows where
+we are going to input and browse the books records.
