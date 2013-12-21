@@ -5,7 +5,60 @@ Getting Started
 Setting up a development environment
 ------------------------------------
 
-TODO
+Using HgNested
+~~~~~~~~~~~~~~
+
+`HgNested <http://code.google.com/p/hgnested/>`_ is a mercuarial extension
+used to work on nested repositories. In order to install hgnested you must run:
+
+::
+
+  pip install hgnested
+
+Once installed you can checkout the lastest sources by executing:
+
+::
+
+  hg nclone http://hg.tryton.org/trytond
+
+This will also clone all the modules in trytond/modules.
+
+In order to run the tryton server you must install all the requirements as
+described on the `Wiki <http://code.google.com/p/tryton/wiki/Requirements#Requirements_for_the_Tryton_Server>`_.
+
+After this you can run your server with:
+
+::
+
+  trytond/bin/trytond
+
+Using virtualenvwrappers templates
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+The Openlabs guys have created a virtualenvwrapper template to get a virtualenv
+created with all the required dependencies (except your database drivers).
+
+You can install it executing:
+
+::
+
+  pip install virtualenvwrapper.tryton
+
+You can create a virtualenv with the latest version of tryton running:
+
+::
+
+  mkproject -t tryton virtualenv_name
+
+In the virtualenv you can run your tryton server by executing:
+
+::
+
+  trytond
+
+
+For more information about available templates please refer to
+`virtualenvwrapper.tryton repository <https://github.com/openlabs/virtualenvwrapper.tryton>`_
 
 Hello World (in progress)
 ------------------------
