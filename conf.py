@@ -18,7 +18,6 @@ import os
 # add these directories to sys.path here. If the directory is relative to the
 # documentation root, use os.path.abspath to make it absolute, like shown here.
 #sys.path.insert(0, os.path.abspath('.'))
-sys.path.insert(0, os.path.abspath('_ext'))
 
 # -- General configuration -----------------------------------------------------
 
@@ -27,10 +26,7 @@ sys.path.insert(0, os.path.abspath('_ext'))
 
 # Add any Sphinx extension module names here, as strings. They can be extensions
 # coming with Sphinx (named 'sphinx.ext.*') or your custom ones.
-# extensions = ['edit_on_github']
-extnsions = []
-edit_on_github_project = 'openlabs/tryton-documentation'
-edit_on_github_branch = 'master'
+extensions = []
 
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['_templates']
@@ -99,6 +95,8 @@ pygments_style = 'sphinx'
 #
 # on_rtd is whether we are on readthedocs.org, this line of
 # code grabbed from docs.readthedocs.org
+# otherwise, readthedocs.org uses their theme by default,
+# so no need to specify it
 on_rtd = os.environ.get('READTHEDOCS', None) == 'True'
 
 if not on_rtd:  # only import and set the theme if we're building docs locally
@@ -112,7 +110,7 @@ if not on_rtd:  # only import and set the theme if we're building docs locally
         html_theme = 'sphinx_rtd_theme'
         html_theme_path = [sphinx_rtd_theme.get_html_theme_path()]
 
-# otherwise, readthedocs.org uses their theme by default, so no need to specify it
+
 
 # Theme options are theme-specific and customize the look and feel of a theme
 # further.  For a list of options available for each theme, see the
