@@ -70,8 +70,8 @@ in-memory entities and the persistent data on the database.
 Whenever we are building a module in Tryton, we deal with a high-level, 
 object-oriented representation of our entities. Generally, we are free from 
 writing explicit SQL or python-sql instructions, but in order for this *magic* 
-to happen, Tryton's *Pool* must be "aware" of the existence of your entity 
-classes.
+to happen, Tryton's :py:class:`~trytond.pool.Pool` must be "aware" of the
+existence of your entity classes.
 
 ::
 
@@ -109,13 +109,18 @@ find *Book*, *Author*, *Publisher*, etc. A domain model encompasses real world
 objects that your software solution is expected to deal with.
 
 In our tutorial, we are going to have a simple Book model. It has some fields 
-associated with it: *title*, *isbn*, *subject*, *abstract*. Each field has a 
-**Type**. This type determines many aspects and behaviours of the application. 
-For instance, a *Char* field will be created as a *Char Varying* column inside
-the database. A *Text* field will be displayed as a large text box in the 
-Tryton Client window and so on. In order to know every field avaliable, you 
-can check the modules inside TRYTOND_HOME/trytond/module/fields or you can 
-consult the `API reference <http://doc.tryton.org/3.0/trytond/doc/ref/models/fields.html#ref-models-fields>`_.
+associated with it: *title*, *isbn*, *subject*, *abstract*.
+
+Each field has a **Type**. This type determines many aspects and behaviours
+of the application. For instance,
+
+* :py:class:`~trytond.model.fields.Char` field will be created as a
+  *Char Varying* column inside the database.
+* :py:class:`~trytond.model.fields.Text` field will be displayed as a large
+  text box in the Tryton Client window and so on.
+
+In order to know every field avaliable, you can consult the
+`API reference <http://doc.tryton.org/3.0/trytond/doc/ref/models/fields.html#ref-models-fields>`_.
 
 
 ::
