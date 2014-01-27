@@ -1,17 +1,39 @@
 Database management
 ===================
 
-TODO
+Install a database of your choice. Here Posgres database is taken as sample 
+database. Steps for installing Postgres can be found from 
+`Postgres Installation <http://wiki.postgresql.org/wiki/Detailed_installation_guides/>`_
+Install the database and give a new password to the postgres database
+user.
 
 Creating Database
 -----------------
-
 TODO
 
 Upgrading a Database
 --------------------
+To upgrade the database there are 2 ways to do that:
 
-TODO
+* By typing the command: 
+
+.. code-block:: python
+
+    $ trytond -c ../etc/trytond.conf -u module_name -d database_name
+
+* By using tryton client and connecting with your database.
+On left bar Under Modules > Modules.
+There you will see the modules installed on your tryton client along with
+the modules that are not in installed state. You can simply click on Mark
+for Installation for the module you wish to install and then click on
+Launch action to Perform Pending Installation/Upgrade. All the modules
+that you mark for installation will be installed.
+
+
+.. figure:: images/upg-db.png
+      :width: 600pt
+You can see the modules installed and not installed from the above image.
+By clicking on Launch Action Perform Upgradation.
 
 Installing Modules
 ------------------
