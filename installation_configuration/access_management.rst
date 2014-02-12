@@ -1,13 +1,22 @@
 Access Control & management
 ===========================
 
-#. Access rules where Group is left blank apply to everyone.
+#. For models/fields which have no access rules, everyone by default has
+   access.
+#. All users are subject to access rules that have group left blank.
+   Users are also subject to access rules that apply to groups to
+   which they belong.
 #. If contradictory access rules apply to a single user, the most permissive
    applies.
-#. For models/fields which have no access rules, everyone by default has
-   access. But once a model/field has an associated access rule, the default
-   rule becomes no-access. The existence of an access rule implicitly restricts
-   users not explicitly given access.
+
+   #. Example: If a global (group blank) access rule denies access,
+      but a group-specific access rule grants access, then access is
+      allowed.
+   #. Example: If a global (group blank) access rule allows access,
+      then everyone will have access; no group-specific rules can
+      block it. (Thus, globally granting access is a bad idea. Better
+      to just leave the target alone, in which case the default rule
+      will apply, permitting access.)
 #. Access "rules" can be set for Groups. These make access dependent on whether
    the circumstances meet administrator-specified tests. Using these may hurt
    system speed.
