@@ -10,11 +10,12 @@ tryton.
 
 Steps for setting up a development environment for tryton.
 
-1. First check Python is running. To do this you can simply type **python** in
-   terminal and press **enter**.Then it will open the python interactive
-   shell with "**>>>**". If it works same like this, it means you have
-   python in you machine and you can simply leave Python with **exit()**
-   command.
+1. First thing is to have Python2 running on your system.
+   You can check if python is installed by typing **python2** in a console window
+   and pressing **Enter**.
+   If python is installed an interactive shell will open, printing out version info
+   and **>>>**
+   You can exit by calling the function **exit()** or by pressing **ctrl+d**
 
 2. Next, Install Posgres database. Steps for installing Postgres can be
    found from `Postgres Installation <http://wiki.postgresql.org/wiki/Detailed_installation_guides/>`_
@@ -22,16 +23,16 @@ Steps for setting up a development environment for tryton.
    password.
 
 3. Set up the virtual environment and install tryton client and trytond.
-You can directly install Tryton using pip command-line tool in your
-virtualev.
+   You can directly install Tryton using pip command-line tool in your
+   virtualev.
 
-.. code-block:: python
+    .. code-block:: bash
 
-    $ pip install trytond
-    $ pip install tryton
-    $ pip install tryton_module_name
+        $ pip install trytond
+        $ pip install tryton_module_name
 
     Replace module_name with the name of the module you want to install
+
 
 
 Hello World (in progress)
@@ -294,13 +295,19 @@ Creating Reports
 Add the following line to the file 'library.xml' into the /data tag :
 
 .. code-block:: xml
-
+        <!-- First thing: define the report itself,
+        model: Target-Model
+        report_name: the report class' __name__
+        report: template ods-file
+        -->
         <record model="ir.action.report" id="report_library">
             <field name="name">Book</field>
             <field name="model">library.Book</field>
             <field name="report_name">library.book</field>
             <field name="report">library/book.odt</field>
         </record>
+        <!-- Second we register a keyword
+        (so we can call the report from tryton client) -->
         <record model="ir.action.keyword" id="report_library_book">
             <field name="keyword">form_print</field>
             <field name="model">library.book,-1</field>
@@ -316,6 +323,11 @@ file.
    <for each="library in objects">
    <library.title>
    </for>
+
+.. tip::
+
+    placeholders can be inserted in libreoffice by pressing **ctrl+f2**
+    **functions -> placeholder -> text**
 
 In case you are dealing with ods file. For adding a placeholder you have
 to add a hyperlink.

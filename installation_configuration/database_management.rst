@@ -17,7 +17,7 @@ To upgrade the database there are 2 ways to do that:
 
 * By typing the command: 
 
-.. code-block:: python
+.. code-block:: bash
 
     $ trytond -c ../etc/trytond.conf -u module_name -d database_name
 
