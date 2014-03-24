@@ -4,7 +4,7 @@ Basic Concepts
 **Models** 
 
 
-**class trytond.model.Model([id[,**kwargs]])**
+** :py:class:`~trytond.model.Model([id[,**kwargs]]) **
 This is the base class that every kind of model inherits. It defines
 common attributes of all models.
 For details description about Models in tryton refer to `Tryton Model Docs <http://doc.tryton.org/3.0/trytond/doc/ref/models/models.html/>`_
@@ -93,7 +93,7 @@ Wizard
 ------------------------------------------------------------------
 A wizard is a fine state machine.
 
-**class trytond.wizard.Wizard(session_id)**
+** :py:class:`~trytond.wizard.Wizard(session_id)**
 This is the base for any wizard. It contains the engine for the finite
 state machine. A wizard must have some state instance attributes that the
 engine will use.
