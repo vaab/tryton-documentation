@@ -4,7 +4,7 @@ Basic Concepts
 **Models** 
 
 
-** :py:class:`~trytond.model.Model([id[,**kwargs]]) **
+:py:class:`~trytond.model.Model([id[,**kwargs]])`
 This is the base class that every kind of model inherits. It defines
 common attributes of all models.
 For details description about Models in tryton refer to `Tryton Model Docs <http://doc.tryton.org/3.0/trytond/doc/ref/models/models.html/>`_
@@ -13,7 +13,7 @@ A complete library model is explained in the previous chapter.
 **Views** 
 
 The views are used to display records of an object to the user.
-In tryton, objects can have several views, it is the action, that opens
+In tryton, models can have several views, it is the action, that opens
 the window, that tells which views must be used. The view are built using
 XML that is stored in the module's view diectory or can be stored in
 database with the object.ir.ui.view. So generally, they are defined in xml 
@@ -93,7 +93,7 @@ Wizard
 ------------------------------------------------------------------
 A wizard is a fine state machine.
 
-** :py:class:`~trytond.wizard.Wizard(session_id)**
+:py:class:`~trytond.wizard.Wizard(session_id)`
 This is the base for any wizard. It contains the engine for the finite
 state machine. A wizard must have some state instance attributes that the
 engine will use.
