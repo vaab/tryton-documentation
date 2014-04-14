@@ -110,7 +110,7 @@ view their respective structure.
 
 This file must be present at the root of your module's directory. It serves 
 two main purposes: it transforms your directory into a Python visible package 
-(according to Python general rules) ant it also registers in the *Pool*, the 
+(according to Python general rules) and it also registers in the *Pool* the 
 entity classes of the module.
 
 For now, you can think of the *Pool* as a "in memory synchronized image" of 
