@@ -90,7 +90,7 @@ For more information about available templates please refer to
 `virtualenvwrapper.tryton repository <https://github.com/openlabs/virtualenvwrapper.tryton>`_
 
 Hello World (in progress)
-------------------------
+-------------------------
 
 Almost every Tryton functionality that you are going to develop on a daily
 basis is enclosed into the modules. In order to get an idea of available
@@ -259,7 +259,6 @@ to open those windows.
 If you access the defined database, you are going to see the the aforementioned
 table created.
 
-.. note::
 What we have done so far: We have created a module, we have installed that
 module inside Tryton server, we have defined an entity class and Tryton has
 created the corresponding table in the database for us. All that with no more
@@ -349,6 +348,7 @@ Creating Reports
 Add the following line to the file 'library.xml' into the /data tag :
 
 .. code-block:: xml
+
         <!-- First thing: define the report itself,
         model: Target-Model
         report_name: the report class' __name__
@@ -385,6 +385,3 @@ file.
 
 In case you are dealing with ods file. For adding a placeholder you have
 to add a hyperlink.
-
-.. image:: images/ods.png
-    :width: 500pt
