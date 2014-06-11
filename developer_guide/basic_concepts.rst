@@ -5,10 +5,128 @@ Basic Concepts
 
 
 :py:class:`~trytond.model.Model([id[,**kwargs]])`
-This is the base class that every kind of model inherits. It defines
-common attributes of all models.
-For details description about Models in tryton refer to `Tryton Model Docs <http://doc.tryton.org/3.0/trytond/doc/ref/models/models.html/>`_
+This is the base class that every kind of model inherits.
+
+The most commonly used type of models are:
+    - :py:class:`~trytond.model.ModelSQL` (Objects to be stored in an Sql-Database)
+    - :py:class:`~trytond.model.ModelView` (Objects to be viewed in the client)
+    - :py:class:`~trytond.model.Workflow` (Objects to have different states and state-transitions)
+
+For API-Reference about Models in tryton refer
+to `Tryton Model Docs <http://doc.tryton.org/3.2/trytond/doc/ref/models/models.html>`_
+
 A complete library model is explained in the previous chapter.
+
+Special Functions
+-----------------
+
+Most likely your custom Model will inherit from ModelSql and ModelView at least,
+so it can be stored and viewed in the client.
+
+Each model can hold a set of tryton-fields to represent its attributes.
+For a complete list of tryton fields you are refered to
+`Tryton Docs <http://doc.tryton.org/3.2/trytond/doc/ref/models/fields.html>`_
+
+
+
+Default values
+^^^^^^^^^^^^^^
+
+You can define default values for fields by adding a 'default_<field_name>' function to your model:
+
+.. code-block:: python
+
+    class property:
+        owner = fields.Char('Owner')
+        def default_owner():
+            return 'me'
+
+Field-Relationships
+^^^^^^^^^^^^^^^^^^^
+
+If you have a pair of fields that influence each others value, you may define functions to update
+values when a change is detected.
+
+updating field A should trigger an update on a number of fields
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+    * define a function named on_change_<field_name>
+    * return a dictionary containing 'field_name': value for all fields to be updated
+    * decorate the function with @fields.depends(*keys) containing all keys to be updated.
+      this ensures that all required fields get submitted by the client.
+
+
+.. code-block:: python
+
+    class property:
+        is_owned_by_me = fields.Boolean('Is_Owned')
+
+        @fields.depends('is_ownded_by_me')
+        def on_change_owner(self):
+            if self.owner == 'me':
+                return {'is_owned_by_me': True}
+            else:
+                return {'is_owned_by_me': False}
+
+
+update field B each time my model changes
+"""""""""""""""""""""""""""""""""""""""""
+
+    * define a function named on_change_with_<field_name>
+    * return the fields new value
+    * decorate the function with @fields.depends(*keys) using all the keys that may influence the field
+
+.. code-block:: python
+
+    class property:
+        is_owned_by_me = fields.Boolean('Is_Owned')
+
+        @fields.depends('owner')
+        def on_change_with_is_owned_by_me(self):
+            return self.owner == 'me'
+
+
+
+.. note:: on_change_* and on_change_with_* are called from the client
+
+Function fields
+^^^^^^^^^^^^^^^
+
+The previous 'on_change_owner' example could have been solved without storing a new key
+to the database and calculating its value on the fly, by adding a function
+field:
+
+.. code-block:: python
+
+    class propertey:
+        is_owned_by_me = fields.Function(fields.Boolean('Is_Owned'), 'get_ridiculous_information')
+
+        def get_owner_information(self, name):
+            return self.owner == 'me'
+
+where name is the fields name.
+This special field can be accessed just as if it was a normal field
+of the type specified but gets computed each time (on the server)
+
+.. note:: function fields are calculated on the server and may be incorrect when a value is changed in the client
+
+Combining on_change with a Function field
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+You can combine the advantages of Function fields (no extra database-column) and
+on_change_* functions (updated in the client) by combining them:
+
+.. code-block:: python
+
+    class property:
+        is_owned_by_me = fields.Function(fields.Boolean('Is_Owned'), 'on_change_with_is_owned_by_me')
+
+        @fields.depends('owner')
+        def on_change_with_is_owned_by_me(self, name=None):
+             return self.owner == 'me'
+
+
+
 
 **Views** 
 

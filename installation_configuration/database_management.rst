@@ -84,7 +84,7 @@ Backup a database
 Open your Tryton client and go to `File/Databases/Backup Database`. You will
 see a screen, which will display the following details:
 
-.. figure:: images/tryton-backup.png
+.. figure:: images/tryton_backup.png
 
    Tryton's client backup option
 
@@ -102,7 +102,7 @@ client and go to `File/Databases/Restore Database`. You will be prometed to
 entenr the name of the backup file you want to restore. Once the name is
 entered,  you will see a screen which displays the following details:
 
-.. figure:: images/tryton-restore.png
+.. figure:: images/tryton_restore.png
 
    Tryton's client restored option
 

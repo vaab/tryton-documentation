@@ -26,7 +26,8 @@ import os
 
 # Add any Sphinx extension module names here, as strings. They can be extensions
 # coming with Sphinx (named 'sphinx.ext.*') or your custom ones.
-extensions = ['sphinx.ext.intersphinx']
+extensions = ['sphinx.ext.intersphinx',
+              'sphinx.ext.viewcode']
 
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['_templates']
@@ -189,6 +190,8 @@ htmlhelp_basename = 'Trytondoc'
 # -- Options for LaTeX output --------------------------------------------------
 
 latex_elements = {
+# Add russian charset
+'preamble': '\\usepackage[T1, T2A]{fontenc}'
 # The paper size ('letterpaper' or 'a4paper').
 #'papersize': 'letterpaper',
 
