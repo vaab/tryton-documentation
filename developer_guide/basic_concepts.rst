@@ -1,7 +1,7 @@
 Basic Concepts
 ==============
 
-**Models** 
+**Models**
 
 
 :py:class:`~trytond.model.Model([id[,**kwargs]])`
@@ -13,7 +13,7 @@ The most commonly used type of models are:
     - :py:class:`~trytond.model.Workflow` (Objects to have different states and state-transitions)
 
 For API-Reference about Models in tryton refer
-to `Tryton Model Docs <http://doc.tryton.org/3.2/trytond/doc/ref/models/models.html>`_
+to `trytond model docs <http://doc.tryton.org/3.2/trytond/doc/ref/models/models.html>`_
 
 A complete library model is explained in the previous chapter.
 
@@ -25,7 +25,7 @@ so it can be stored and viewed in the client.
 
 Each model can hold a set of tryton-fields to represent its attributes.
 For a complete list of tryton fields you are refered to
-`Tryton Docs <http://doc.tryton.org/3.2/trytond/doc/ref/models/fields.html>`_
+`trytond docs <http://doc.tryton.org/3.2/trytond/doc/ref/models/fields.html>`_
 
 
 
@@ -47,7 +47,7 @@ Field-Relationships
 If you have a pair of fields that influence each others value, you may define functions to update
 values when a change is detected.
 
-updating field A should trigger an update on a number of fields
+Updating a field should trigger an update on a number of fields
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
     * define a function named on_change_<field_name>
@@ -69,10 +69,10 @@ updating field A should trigger an update on a number of fields
                 return {'is_owned_by_me': False}
 
 
-update field B each time my model changes
-"""""""""""""""""""""""""""""""""""""""""
+Update a field each time a set of fields changes
+""""""""""""""""""""""""""""""""""""""""""""""""
 
-    * define a function named on_change_with_<field_name>
+    * define a function named on_change_with_<field_B_name>
     * return the fields new value
     * decorate the function with @fields.depends(*keys) using all the keys that may influence the field
 
@@ -84,8 +84,6 @@ update field B each time my model changes
         @fields.depends('owner')
         def on_change_with_is_owned_by_me(self):
             return self.owner == 'me'
-
-
 
 .. note:: on_change_* and on_change_with_* are called from the client
 
@@ -126,15 +124,13 @@ on_change_* functions (updated in the client) by combining them:
              return self.owner == 'me'
 
 
-
-
-**Views** 
+**Views**
 
 The views are used to display records of an object to the user.
 In tryton, models can have several views, it is the action, that opens
 the window, that tells which views must be used. The view are built using
 XML that is stored in the module's view diectory or can be stored in
-database with the object.ir.ui.view. So generally, they are defined in xml 
+database with the object.ir.ui.view. So generally, they are defined in xml
 files with this kind of xml:
 
 .. code-block:: xml
@@ -167,7 +163,7 @@ extended using Inheritence.
 instantiate a class with the same __name__ attribute:
 
 .. code-block:: python
-    
+
     from trytond.model import fields
     from trytond.pool import PoolMeta
 
@@ -181,7 +177,7 @@ instantiate a class with the same __name__ attribute:
 
 
 **Extending Views** : Each inherit view must start with data tag.
-**xpath** tag is used which specifies the location where the field is to be 
+**xpath** tag is used which specifies the location where the field is to be
 added.
 
 * expr : the xpath expression to find a node in the inherited view.
@@ -238,7 +234,7 @@ It contains the unique name to reference the wizard throughout the platform.
 .. code-block:: python
 
    from trytond.wizard import Wizard, StateView, StateTransition, Button
-   
+
    class PrintLibraryReportStart(ModelView):
        'Print Library Report'
         __name__ = 'library.print_report.start'
@@ -283,7 +279,8 @@ Add the record tag for the wizard in library.xml
     <record model="ir.action.wizard" id="book_print">
         <field name="name">Print Library Book</field>
         <field name="wiz_name">library.print_report</field>
-    </record>  
+    </record>
+
 WebServices
 -----------
 
