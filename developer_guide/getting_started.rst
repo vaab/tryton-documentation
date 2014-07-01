@@ -202,7 +202,7 @@ of the application. For instance,
   text box in the Tryton Client window and so on.
 
 In order to know every field avaliable, you can consult the
-`API reference <http://doc.tryton.org/3.0/trytond/doc/ref/models/fields.html#ref-models-fields>`_.
+`API reference <http://doc.tryton.org/3.2/trytond/doc/ref/models/fields.html#ref-models-fields>`_.
 
 
 ::

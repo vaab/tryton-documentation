@@ -266,5 +266,5 @@ texinfo_documents = [
 
 intersphinx_mapping = {
     'python': ('http://docs.python.org/2.7', None),
-    'trytond': ('http://doc.tryton.org/3.0', None),
+    'trytond': ('http://doc.tryton.org/3.2', None),
 }
