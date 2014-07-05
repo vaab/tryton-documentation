@@ -18,7 +18,7 @@ This is a work in progress, so you are welcome to fork the repository.
 Please run a build test before commiting pull-requests:
 
     $ make html
-    
+
 or
 
     $ make latexpdf

@@ -36,9 +36,11 @@ You can define default values for fields by adding a 'default_<field_name>' func
 
 .. code-block:: python
 
-    class property:
-        owner = fields.Char('Owner')
-        def default_owner():
+    class Book:
+        __name__ = 'library.book'
+        renter = fields.Char('Rented by')
+
+        def default_renter():
             return 'me'
 
 Field-Relationships
@@ -58,15 +60,15 @@ Updating a field should trigger an update on a number of fields
 
 .. code-block:: python
 
-    class property:
-        is_owned_by_me = fields.Boolean('Is_Owned')
+    class Book:
+        is_rented_by_me = fields.Boolean('Rented by Me')
 
-        @fields.depends('is_ownded_by_me')
-        def on_change_owner(self):
+        @fields.depends('is_rented_by_me')
+        def on_change_renter(self):
             if self.owner == 'me':
-                return {'is_owned_by_me': True}
+                return {'is_rented_by_me': True}
             else:
-                return {'is_owned_by_me': False}
+                return {'is_rented_by_me': False}
 
 
 Update a field each time a set of fields changes
@@ -78,12 +80,12 @@ Update a field each time a set of fields changes
 
 .. code-block:: python
 
-    class property:
-        is_owned_by_me = fields.Boolean('Is_Owned')
+    class Book:
+        is_rented_by_me = fields.Boolean('Rented by Me')
 
-        @fields.depends('owner')
-        def on_change_with_is_owned_by_me(self):
-            return self.owner == 'me'
+        @fields.depends('renter')
+        def on_change_with_is_rented_by_me(self):
+            return self.renter == 'me'
 
 .. note:: on_change_* and on_change_with_* are called from the client
 
@@ -96,11 +98,11 @@ field:
 
 .. code-block:: python
 
-    class propertey:
-        is_owned_by_me = fields.Function(fields.Boolean('Is_Owned'), 'get_ridiculous_information')
+    class Book:
+        is_rented_by_me = fields.Function(fields.Boolean('Rented by Me'), 'get_renter_information')
 
-        def get_owner_information(self, name):
-            return self.owner == 'me'
+        def get_renter_information(self, name):
+            return self.renter == 'me'
 
 where name is the fields name.
 This special field can be accessed just as if it was a normal field
@@ -116,15 +118,42 @@ on_change_* functions (updated in the client) by combining them:
 
 .. code-block:: python
 
-    class property:
-        is_owned_by_me = fields.Function(fields.Boolean('Is_Owned'), 'on_change_with_is_owned_by_me')
+    class Book:
+        is_rented_by_me = fields.Function(fields.Boolean('Rented by Me'), 'on_change_with_is_owned_by_me')
 
-        @fields.depends('owner')
+        @fields.depends('renter')
         def on_change_with_is_owned_by_me(self, name=None):
-             return self.owner == 'me'
+             return self.renter == 'me'
+
+
+Relational Fields
+-----------------
+
+Like any `ORM (Object Relational Mapper) <http://en.wikipedia.org/wiki/Object-relational_mapping>`_ Tryton offers relational fields, which enable you
+to connect model(s) to its related model(s). You can use any of these:
+    - Many2Many - for example (Many) models can belong to a category but also to other (Many) categories
+    - Many2One - Connect a set of (Many) models to a parent (One) (example: a company field in company.employee Model)
+    - One2Many - A field representing (Many) connected model instances (example employees field in company.company model)
+    - One2One
+
+Given that information, we could solve our Library example a bit more elegant by using Trytons built-in Party model
+and rent books only to registered parties:
+
+.. code-block:: python
+
+    class Book:
+        __name__ = 'library.book'
+        renter = fields.Many2One('party.party', 'Renter', required=False)
+
+    class Party:
+        __name__ = 'party.party'
+        rented_books = fields.One2Many('library.book', 'renter', 'Rented Books')
+
+.. note:: The One2Many field requires a Many2One field to be referred in the related Model.
 
 
 **Views**
+=========
 
 The views are used to display records of an object to the user.
 In tryton, models can have several views, it is the action, that opens
@@ -157,7 +186,7 @@ Extending Tryton (Inheritance)
 ------------------------------
 
 Tryton modules can be easily extended. Models and Views need to be
-extended using Inheritence.
+extended using Inheritance.
 
 **Extending Models** : To extend an existing model (like Company), one need to
 instantiate a class with the same __name__ attribute:
