@@ -13,6 +13,8 @@ Steps for setting up a development environment for tryton.
 1. First thing is to have Python2 running on your system.
    You can check if python is installed by typing **python2** in a console window
    and pressing **Enter**.
+   If python is not installed, consult your package manager for your operating system.  
+   Or go to www.python.org and select "Downloads"
    If python is installed an interactive shell will open, printing out version info
    and **>>>**
    You can exit by calling the function **exit()** or by pressing **ctrl+d**
