@@ -1,16 +1,36 @@
 Installation Procedure
 ======================
 
-You can directly install Tryton using pip command-line tool in your
-virtualenv.
+Tryton is separated into independent parts:
 
-.. code-block:: bash
+- the server named ``trytond``
+- the GTK client named ``tryton``
+- and several modules to extends server capabilities (ie: account, bank, party, project...)
 
-    $ pip install trytond
-    $ pip install tryton
-    $ pip install tryton_module_name
+You can directly install all these independentely using pip command-line tool
+on your system (or in a virtualenv, a recommended setup) as each of these are
+available on the Python Package Index. Here's how to proceed:
 
-Replace module_name with the name of the module you want to install.
+- Installing the server
+
+  .. code-block:: bash
+
+      pip install trytond
+
+- Installing the GTK client
+
+  .. code-block:: bash
+
+      pip install tryton
+
+- Installing any module for server:
+
+  .. code-block:: bash
+
+      pip install trytond_MODULE_NAME    # Replace MODULE_NAME with the name of the module
+
+  You might be interested by a `list of available modules
+  <https://pypi.python.org/pypi?:action=browse&show=all&c=551>`_.
 
 
 Preparing Application Servers
