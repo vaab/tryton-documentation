@@ -37,6 +37,14 @@ available on the Python Package Index. Here's how to proceed:
   <https://pypi.python.org/pypi?:action=browse&show=all&c=551>`_.
 
 
+.. note::
+
+    Refer to `Virtualenv Docs <https://pypi.python.org/pypi/virtualenv/>`_ for
+    getting started with virtualenv. A recommend way to get your tryton application
+    and it's dependency separated from your system libraries. Although `virtualenv`
+    is not required, you should think about using it.
+
+
 Installing from other means
 ---------------------------
 
@@ -84,6 +92,13 @@ install each package with this command-line (to be run in the root of the packag
   .. code-block:: bash
 
       python setup.py install
+
+.. note::
+
+  Using virtualenv is encouraged, especially if you want to develop or if tryton
+  packages are installed on a system along with other important, unrelated services.
+  Refer to `Virtualenv Docs <https://pypi.python.org/pypi/virtualenv/>`_ for
+  getting started with virtualenv.
 
 
 Preparing Application Servers
