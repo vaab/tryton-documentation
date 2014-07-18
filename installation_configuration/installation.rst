@@ -45,12 +45,16 @@ available on the Python Package Index. Here's how to proceed:
     is not required, you should think about using it.
 
 
-Installing from other means
----------------------------
+Installing from system packages
+-------------------------------
 
 Specific packages are available for Windows, MacOSX, various
 Linux flavor, and BSD. These can be find on the `Tryton Download Page
 <http://www.tryton.org/download.html>`_.
+
+
+Installing from source
+----------------------
 
 For developer, you can browse the `Source Code Repository <http://hg.tryton.org/>` and
 download source code thanks to your favorite version control system:
@@ -84,7 +88,6 @@ And up-to-date, but non-official git repositories are maintained on github:
       git clone https://github.com/tryton/tryton.git
       git clone https://github.com/tryton/trytond.git
       git clone https://github.com/tryton/MODULE_NAME.git
-
 
 If using ``tar.gz`` or getting source by version controlled repository, don't forget to
 install each package with this command-line (to be run in the root of the package):
