@@ -52,6 +52,9 @@ Specific packages are available for Windows, MacOSX, various
 Linux flavor, and BSD. These can be find on the `Tryton Download Page
 <http://www.tryton.org/download.html>`_.
 
+Valuable information specific to each system can be found on
+the `tryton wiki <https://code.google.com/p/tryton/wiki/InstallationOS>`_.
+
 
 Installing from source
 ----------------------
